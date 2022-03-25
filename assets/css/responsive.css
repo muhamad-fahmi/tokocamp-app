@@ -1,0 +1,26 @@
+@media screen and (max-width: 660px) {
+    .nav-mobile {
+        display: block;
+    }
+    .nav-desktop {
+        display: none !important;
+    }
+    .offcanvas {
+        width: 300px;
+    }
+    .header {
+        padding-top: 4rem;
+    }
+    .carousel .carousel-inner {
+        border-radius: 10px;
+    }
+    .header .carousel img {
+        height: 8rem;
+    }
+    .card .card-title {
+        font-size: 14px;
+    }
+    .navbar .offcanvas .offcanvas-body .dropdown{
+        display: none;
+    }
+}
