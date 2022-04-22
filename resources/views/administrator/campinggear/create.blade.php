@@ -35,6 +35,14 @@
                             </div>
 
                             <x-input type="text" field="name"/>
+                            <div class="form-group">
+                                <label for="select">Select Category</label>
+                                <select name="category" id="category" class="form-control select2">
+                                    @foreach ($campinggearcats as $category)
+                                        <option value="{{$category->id}}">{{ucwords($category->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <x-input type="number" field="price"/>

@@ -19,9 +19,9 @@ class Package extends Model
     {
         return $this->belongsTo(Location::class);
     }
-    public function category()
+    public function subcategory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subcategory::class);
     }
     public function galery()
     {

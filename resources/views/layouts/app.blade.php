@@ -21,7 +21,7 @@
     <!-- NAVBAR START -->
     <nav class="navbar navbar-light bg-white navbar-expand-lg fixed-top shadow">
         <div class="container-fluid py-2 px-lg-5 px-md-5 px-sm-2">
-            <a class="navbar-brand me-5" href="#">
+            <a class="navbar-brand me-5" href="/">
                 <img src="{{ asset('userpage/images/logo/logo-tokocamp.png') }}" alt="Tokocamp Indonesia">
             </a>
             <div class="nav-mobile">
@@ -75,6 +75,10 @@
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
+                                            <li><a class="dropdown-item" href="#"><i class="fas fa-users me-2"></i> Partnership</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
                                             <li><a class="dropdown-item" href="{{ route('logoutuser')}}"><i class="fas fa-sign-out me-2"></i> Logout</a></li>
                                         </ul>
                                     </li>
@@ -117,19 +121,25 @@
                                 <p><strong>Aktivitas Saya</strong></p>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href=""><i class="fas fa-file-alt me-2"></i> Transaksi</a>
+                                <a class="nav-link" href="/transaction"><i class="fas fa-file-alt me-2"></i> Transaksi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-star me-2"></i> Ulasan</a>
+                                <a class="nav-link" href="/feedback"><i class="fas fa-star me-2"></i> Ulasan</a>
+                            </li>
+                            <li class="nav-item pt-4">
+                                <p><strong>Partnership</strong></p>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/partnership"><i class="fas fa-users me-2"></i> Partnership</a>
                             </li>
                             <li class="nav-item pt-4">
                                 <p><strong>Hubungi Kami</strong></p>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href=""><i class="fab fa-whatsapp me-2"></i> Customer Service</a>
+                                <a class="nav-link" href="https://wa.me/"><i class="fab fa-whatsapp me-2"></i> Customer Service</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-envelope me-2"></i> Customer Service</a>
+                                <a class="nav-link" href="mailto:"><i class="fas fa-envelope me-2"></i> Customer Service</a>
                             </li>
                         </ul>
                     </div>
@@ -138,38 +148,7 @@
         </div>
     </nav>
     <!-- NAVBAR END -->
-    <!-- HEADER START -->
-    <section class="header mt-5">
-        <div class="container">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/3/24/d5132038-53dd-4f8d-9782-43cddb2e6f79.jpg.webp" class="d-block w-100 img-header" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/3/24/c82b698a-2006-43c6-bbf5-e4696ee78778.jpg.webp" class="d-block w-100 img-header" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2021/7/30/74d32a7f-6a2d-49a3-b325-114de4b055c5.jpg.webp" class="d-block w-100 img-header" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-            </div>
-        </div>
-    </section>
-    <!-- HEADER END -->
+
 
     @yield('contents')
 
@@ -189,10 +168,9 @@
                     <div class=" col-sm-4 col-md  col-6 col">
                         <h5 class="headin5_amrc col_white_amrc pt2">Kategori Terbaik</h5>
                         <ul class="footer_ul_amrc">
-                            <li class="mb-3"><a href="" class="text-decoration-none">Create Wedding Invitation</a></li>
-                            <li class="mb-3"><a href="" class="text-decoration-none">Create Birthday Invitation</a></li>
-                            <li class="mb-3"><a href="" class="text-decoration-none">Create Webbinar Invitation</a></li>
-                            <li class="mb-3"><a href="" class="text-decoration-none">Create Other Event Invitation</a></li>
+                            @foreach ($categories as $category)
+                            <li class="mb-3"><a href="/category/{{ $category->slug }}" class="text-decoration-none">{{ ucwords($category->name) }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 

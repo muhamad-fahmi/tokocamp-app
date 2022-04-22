@@ -30,4 +30,12 @@ class Category extends Model
     {
         return $this->hasMany(Rate::class);
     }
+    public function subcategory()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
+    public function campinggearcat()
+    {
+        return $this->hasMany(Campinggearcategory::class);
+    }
 }

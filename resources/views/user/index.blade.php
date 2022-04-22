@@ -6,6 +6,38 @@ function rupiah($angka){
 }
 ?>
 @section('contents')
+    <!-- HEADER START -->
+    <section class="header mt-5">
+        <div class="container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/3/24/d5132038-53dd-4f8d-9782-43cddb2e6f79.jpg.webp" class="d-block w-100 img-header" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/3/24/c82b698a-2006-43c6-bbf5-e4696ee78778.jpg.webp" class="d-block w-100 img-header" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2021/7/30/74d32a7f-6a2d-49a3-b325-114de4b055c5.jpg.webp" class="d-block w-100 img-header" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+            </div>
+        </div>
+    </section>
+    <!-- HEADER END -->
     <!-- CONTENT -->
     <section class="main py-5">
         <div class="container">
@@ -113,13 +145,42 @@ function rupiah($angka){
                 @else
                     @foreach ($packages as $package)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                            <a href="" class="text-decoration-none text-dark">
+                            <a href="/packages/{{ $package->slug }}" class="text-decoration-none text-dark">
                                 <div class="card border border-0 shadow">
                                     <img src="{{ asset('images/packages/'.json_decode($package->images)[0]) }}" class="card-img-top product" alt="{{ $package->name }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ ucwords($package->name) }}</h5>
+                                        <p class="card-title">{{ ucwords($package->name) }}</p>
                                         <p class="card-text price"><strong>{{ rupiah($package->price) }}</strong></p>
-                                        <p class="card-text location"><i class="fa-solid fa-location-dot me-1 text-success"></i> Sentul Bogor</p>
+                                        <p class="card-text location"><i class="fa-solid fa-location-dot me-1 text-success"></i> {{ ucwords($package->subcategory->area . " (" .str_replace('Kabupaten', 'Kab', $package->subcategory->city).")") }}</p>
+                                        <p class="card-text review"><i class="fa-solid fa-star text-warning me-1"></i> 5 Reviews</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                @endif
+                @if ($campinggears->count() == 0)
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="card border border-0 shadow">
+                        <img src="https://images.tokopedia.net/img/cache/900/VqbcmM/2021/2/25/8e960683-4940-45ff-9e5c-b8a2df4716f7.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Kursi Camping</h5>
+                            <p class="card-text price"><strong>Rp. 200.000</strong></p>
+                            <p class="card-text location"><i class="fa-solid fa-location-dot me-1 text-success"></i> Sentul Bogor</p>
+                            <p class="card-text review"><i class="fa-solid fa-star text-warning me-1"></i> 5 Reviews</p>
+                        </div>
+                    </div>
+                </div>
+                @else
+                    @foreach ($campinggears as $campinggear)
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a href="/campinggear/{{ $campinggear->slug }}" class="text-decoration-none text-dark">
+                                <div class="card border border-0 shadow">
+                                    <img src="{{ asset('images/campinggear/'.$campinggear->image) }}" class="card-img-top product" alt="{{ $campinggear->name }}">
+                                    <div class="card-body">
+                                        <p class="card-title">{{ ucwords($campinggear->name) }}</p>
+                                        <p class="card-text price"><strong>{{ rupiah($campinggear->price) }}</strong></p>
+                                        <p class="card-text location"><i class="fa-solid fa-location-dot me-1 text-success"></i> Stok {{ $campinggear->stok }}</p>
                                         <p class="card-text review"><i class="fa-solid fa-star text-warning me-1"></i> 5 Reviews</p>
                                     </div>
                                 </div>

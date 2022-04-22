@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
 use App\Models\admin\Package;
+use App\Models\admin\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageInt;
@@ -29,22 +30,10 @@ class PackageController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('id', 'desc')->get();
-        $curl = curl_init();
+        $subcategories = Subcategory::orderBy('id', 'desc')->get();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://api.countrystatecity.in/v1/countries',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_HTTPHEADER => array(
-            'X-CSCAPI-KEY: akVWZFZwTnpMU1N0QzNNNkJHNndJNU9sTmRpWk1uZDlyOXZDTlU3aA=='
-          ),
-        ));
 
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $countries = json_decode($response);
-
-        return view('administrator.packages.create', compact('categories', 'countries'));
+        return view('administrator.packages.create', compact('subcategories'));
     }
 
     /**
@@ -99,29 +88,13 @@ class PackageController extends Controller
                 }
             }
 
-            $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.countrystatecity.in/v1/countries/'.$request->country.'/states/'.$request->state.'/cities',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => array(
-                'X-CSCAPI-KEY: akVWZFZwTnpMU1N0QzNNNkJHNndJNU9sTmRpWk1uZDlyOXZDTlU3aA=='
-            ),
-            ));
-
-            $response = curl_exec($curl);
-
-            curl_close($curl);
-
-            echo $response;
-            echo "<br><br>".$request->city;
-            die();
 
             if (isset($data)) {
                 Package::create(
                     [
                         'user_id' => 1,
-                        'category_id' => $request->category,
+                        'subcategory_id' => $request->category,
                         'name' => $request->name,
                         'include' => $request->include,
                         'minimal' => $request->minimal,
@@ -130,10 +103,6 @@ class PackageController extends Controller
                         'images' => json_encode($data),
                         'slug' => Str::slug($request->name, '-'),
                         'status' => '1',
-                        'country' => $request->country,
-                        'states' => $request->staes,
-                        'city' => $request->city,
-                        'area' => $request->area,
                     ]
                 );
 
@@ -227,7 +196,7 @@ class PackageController extends Controller
                 Package::find($id)->update(
                     [
                         'user_id' => 1,
-                        'category_id' => $request->category,
+                        'subcategory_id' => $request->category,
                         'name' => $request->name,
                         'include' => $request->include,
                         'minimal' => $request->minimal,
@@ -244,7 +213,7 @@ class PackageController extends Controller
             Package::find($id)->update(
                 [
                     'user_id' => 1,
-                    'category_id' => $request->category,
+                    'subcategory_id' => $request->category,
                     'name' => $request->name,
                     'include' => $request->include,
                     'minimal' => $request->minimal,

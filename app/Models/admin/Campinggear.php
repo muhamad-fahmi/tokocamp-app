@@ -14,4 +14,8 @@ class Campinggear extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function campinggearcat()
+    {
+        return $this->belongsTo(Campinggearcategory::class);
+    }
 }

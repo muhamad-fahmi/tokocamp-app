@@ -42,8 +42,8 @@
                             @foreach ($packages as $package)
                               <tr>
                                 <td>1</td>
-                                <td>{{ ucwords($package->category->name) }}</td>
                                 <td>{{ ucwords($package->name) }}</td>
+                                <td>{{ ucwords($package->subcategory->name) }}</td>
                                 <td>{{ rupiah($package->price) }}</td>
                                 <td>{{ $package->minimal }}</td>
                                 <td>

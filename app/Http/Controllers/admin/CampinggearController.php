@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\Campinggear;
+use App\Models\admin\Campinggearcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageInt;
@@ -28,7 +29,8 @@ class CampinggearController extends Controller
      */
     public function create()
     {
-        return view('administrator.campinggear.create');
+        $campinggearcats = Campinggearcategory::orderBy('id', 'desc')->get();
+        return view('administrator.campinggear.create', compact('campinggearcats'));
     }
 
     /**

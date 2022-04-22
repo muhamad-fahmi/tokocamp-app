@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('category_id');
+            $table->foreignId('subcategory_id');
             $table->text('images');
             $table->string('name');
             $table->string('price');
@@ -25,10 +25,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('slug')->unique();
             $table->string('status');
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
-            $table->string('area')->nullable();
             $table->timestamps();
         });
     }

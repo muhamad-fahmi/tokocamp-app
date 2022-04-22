@@ -1,4 +1,7 @@
 @media screen and (max-width: 660px) {
+    nav.broad {
+        display: none !important;
+    }
     .nav-mobile {
         display: block;
     }

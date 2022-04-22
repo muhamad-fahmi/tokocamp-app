@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('campinggears', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('campinggearcategory_id');
             $table->string('image');
             $table->string('name');
             $table->text('description')->nullable();

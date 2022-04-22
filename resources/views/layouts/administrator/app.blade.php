@@ -265,6 +265,13 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Sub Categories</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="/admin/system/subcategory/create">Add New Sub Category</a></li>
+                  <li><a class="nav-link" href="/admin/system/subcategory">Manage Sub Categories</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i> <span>Packages</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="/admin/system/packages/create">Add New Package</a></li>
@@ -274,6 +281,8 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Camping Gear</span></a>
                 <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="/admin/system/campinggearcat/create">Add Cat Camping Gear</a></li>
+                  <li><a class="nav-link" href="/admin/system/campinggearcat">Manage Cat Camping Gear</a></li>
                   <li><a class="nav-link" href="/admin/system/campinggear/create">Add New Camping Gear</a></li>
                   <li><a class="nav-link" href="/admin/system/campinggear">Manage Camping Gear</a></li>
                 </ul>
@@ -281,6 +290,14 @@
 
               <li class="menu-header">Clients</li>
               <li><a class="nav-link" href="/admin/system/accounts"><i class="far fa-user"></i> <span>User Accounts</span></a></li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Partners</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="/admin/system/partner/term">Partner Term</a></li>
+                  <li><a class="nav-link" href="/admin/system/partner/request">Partner Join Request</a></li>
+                  <li><a class="nav-link" href="/admin/system/partner">Manage Partners</a></li>
+                </ul>
+              </li>
               <li><a class="nav-link" href="/admin/system/orders"><i class="fa fa-list-alt"></i> <span>Orders</span></a></li>
               <li><a class="nav-link" href="/admin/system/feedback"><i class="fa fa-star-half-alt"></i> Feedback</a></li>
 
@@ -301,6 +318,13 @@
               </li>
 
               <li class="menu-header">Seetings</li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i> <span>Header</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="/admin/system/headers/create">Add New Header</a></li>
+                  <li><a class="nav-link" href="/admin/system/headers">Manage Headers</a></li>
+                </ul>
+              </li>
               <li><a class="nav-link" href="/admin/system/settings"><i class="fa fa-cogs"></i> <span>Settings</span></a></li>
 
             </ul>
