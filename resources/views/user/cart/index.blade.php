@@ -46,10 +46,31 @@
                                         <p class="mb-1">{{ ucwords($pcart->package->name) }}</p>
                                         <p><strong>{{ rupiah($pcart->package->price) }}</strong></p>
                                         <div class="d-flex pt-4 border-1 border-top">
-                                            <button class="btn btn-danger me-3"><i class="fas fa-trash-alt"></i></button>
+                                            <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDeletepackage{{ $pcart->id }}"><i class="fas fa-trash-alt"></i></button>
                                             <button id="minbtnmbl" class="btn btn-outline-success me-2">-</button>
                                             <input type="text" class="form-control me-2 text-center" id="qtyinputmbl" value="{{ $pcart->total }}" readonly>
                                             <button id="addbtnmbl" class="btn btn-success">+</button>
+                                        </div>
+                                        <!-- Modal Delete-->
+                                        <div class="modal fade" id="modalDeletepackage{{ $pcart->id }}" tabindex="-1" aria-labelledby="modalDeletepackage{{ $pcart->id }}Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="modalDeletepackage{{ $pcart->id }}Label"><i class="fas fa-exclamation-circle"></i> Delete Alert</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                Will you delete this item from your cart ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <form action="/cart/package/{{ $pcart->id }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">Continue</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                         @php
                                             $ptotal[] = $pcart->package->price * $pcart->total;
@@ -79,10 +100,31 @@
                                     <p class="mb-1">{{ ucwords($lcart->campinggear->name) }}</p>
                                     <p><strong>{{ rupiah($lcart->campinggear->price) }}</strong></p>
                                     <div class="d-flex pt-4 border-1 border-top">
-                                        <button class="btn btn-danger me-3"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDeleteCampinggear{{ $lcart->id }}"><i class="fas fa-trash-alt"></i></button>
                                         <button id="minbtnmbl" class="btn btn-outline-success me-2">-</button>
                                         <input type="text" class="form-control me-2 text-center" id="qtyinputmbl" value="1" readonly>
                                         <button id="addbtnmbl" class="btn btn-success">+</button>
+                                    </div>
+                                    <!-- Modal Delete -->
+                                    <div class="modal fade" id="modalDeleteCampinggear{{ $lcart->id }}" tabindex="-1" aria-labelledby="modalDeleteCampinggear{{ $lcart->id }}Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDeleteCampinggear{{ $lcart->id }}Label"><i class="fas fa-exclamation-circle"></i> Delete Alert</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            Will you delete this item from your cart ?
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form action="/cart/campinggear/{{ $lcart->id }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Continue</button>
+                                            </form>
+                                            </div>
+                                        </div>
                                     </div>
                                     @php
                                         $ptotal[] = $lcart->campinggear->price * $lcart->total;
@@ -155,6 +197,19 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('vendor/izitoast/dist/js/iziToast.min.js') }}"></script>
+    <?php
+        if (session('warning')){
+        ?>
+            <script>
+                iziToast.warning({
+                    title: 'warning',
+                    message: '{{ session('warning') }}',
+                    position: 'bottomRight'
+                });
+            </script>
+        <?php
+        }
+    ?>
     <script>
         function rupiah (num) {
             return "Rp " + num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
@@ -211,7 +266,7 @@
         ?>
             <script>
                 iziToast.success({
-                    title: 'Invalid',
+                    title: 'Success',
                     message: '{{ session('success') }}',
                     position: 'bottomRight'
                 });
@@ -219,4 +274,5 @@
         <?php
         }
     ?>
+
 @endpush

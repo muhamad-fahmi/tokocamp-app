@@ -55,6 +55,11 @@ Route::post('/pcart-qty', [UserController::class, 'pcartqty']);
 Route::post('/lcart-qty', [UserController::class, 'lcartqty']);
 Route::get('/cart', [UserController::class, 'mycart']);
 
+Route::delete('/cart/package/{id}', [UserController::class, 'pcartdel']);
+Route::delete('/cart/campinggear/{id}', [UserController::class, 'lcartdel']);
+
+
+
 // CHECKOUT
 Route::post('/checkout', [UserController::class, 'checkout']);
 
