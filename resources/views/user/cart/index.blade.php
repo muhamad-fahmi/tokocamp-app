@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('styles')
 <link rel="stylesheet" href="{{asset('userpage/css/pagestyle.css')}}">
+<link rel="stylesheet" href="{{ asset('vendor/izitoast/dist/css/iziToast.min.css') }}">
 <style>
     .form-check-input:checked {
         background-color: #146b02 !important;
@@ -44,7 +45,7 @@
                                     </div>
                                     <div class="col-8 col-lg-9">
                                         <p class="mb-1">{{ ucwords($pcart->package->name) }}</p>
-                                        <p><strong>{{ rupiah($pcart->package->price) }}</strong></p>
+                                        <p><strong id="price">{{ rupiah($pcart->package->price) }}</strong></p>
                                         <div class="d-flex pt-4 border-1 border-top">
                                             <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDeletepackage{{ $pcart->id }}"><i class="fas fa-trash-alt"></i></button>
                                             <button id="minbtnmbl" class="btn btn-outline-success me-2">-</button>
@@ -216,8 +217,8 @@
         }
 
         $(document).ready(()=>{
-            $('#subtotal').text($('#price').text())
-            $('#subtotaldesk').text($('#price').text())
+            $('#total').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
+            $('#totaldesk').text($('#price').text())
             if($('#qtyinputmbl').val() <= 1){
                 $('#minbtnmbl').addClass('disabled')
             }
@@ -227,7 +228,7 @@
 
             $('#addbtnmbl').click(()=>{
                 $('#qtyinputmbl').val(parseInt($('#qtyinputmbl').val()) + 1);
-                $('#subtotal').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
+                $('#total').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
                 $('#qty').val(parseInt($('#qtyinputmbl').val()) + 1)
                 if($('#qtyinputmbl').val() > 1){
                     $('#minbtnmbl').removeClass('disabled')
@@ -235,7 +236,7 @@
             });
             $('#minbtnmbl').click(()=>{
                 $('#qtyinputmbl').val(parseInt($('#qtyinputmbl').val()) - 1);
-                $('#subtotal').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
+                $('#total').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
                 $('#qty').val(parseInt($('#qtyinputmbl').val()) - 1)
                 if($('#qtyinputmbl').val() <= 1){
                     $('#minbtnmbl').addClass('disabled')
@@ -243,7 +244,7 @@
             });
             $('#addbtndesk').click(()=>{
                 $('#qtyinputdesk').val(parseInt($('#qtyinputdesk').val()) + 1);
-                $('#subtotaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
+                $('#totaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
                 $('#qtydesk').val(parseInt($('#qtyinputdesk').val()) + 1)
                 if($('#qtyinputdesk').val() > 1){
                     $('#minbtndesk').removeClass('disabled')
@@ -251,7 +252,7 @@
             });
             $('#minbtndesk').click(()=>{
                 $('#qtyinputdesk').val(parseInt($('#qtyinputdesk').val()) - 1);
-                $('#subtotaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
+                $('#totaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
                 $('#qtydesk').val(parseInt($('#qtyinputdesk').val()) - 1)
                 if($('#qtyinputdesk').val() <= 1){
                     $('#minbtndesk').addClass('disabled')

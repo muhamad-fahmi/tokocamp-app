@@ -57,7 +57,7 @@ class UserController extends Controller
         if (isset(auth()->user()->id)) {
             return view('user.cart.index', compact('packagecart', 'categories', 'campinggearcart'));
         } else {
-            return view('user.cart.index', compact('packagecart', 'categories', 'campinggearcart'));
+            return view('user.cart.index', compact('categories'));
         }
     }
 

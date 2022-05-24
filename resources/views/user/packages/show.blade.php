@@ -123,7 +123,7 @@ function rupiah($angka){
                                 <p><strong>Atur Jumlah Pemesanan</strong></p>
                                 <div class="d-flex mb-3">
                                     <button id="minbtndesk" class="btn btn-outline-success me-2">-</button>
-                                    <input type="text" class="form-control me-2 text-center" id="qtyinputdesk" value="1" readonly>
+                                    <input type="text" class="form-control me-2 text-center" id="qtyinputdesk"  readonly>
                                     <button id="addbtndesk" class="btn btn-success">+</button>
                                 </div>
                                 <small class="text-muted">Min pemesanan 12</small>
@@ -135,6 +135,7 @@ function rupiah($angka){
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $package->id }}">
                                     <input type="hidden" name="qty" id="qtydesk" value="1">
+                                    {{ var_dump($package) }}
                                     <input type="hidden" name="type" value="1">
                                     <button type="submit" class="btn btn-success w-100 mt-3">Masukan Keranjang</button>
                                 </form>
@@ -193,13 +194,14 @@ function rupiah($angka){
                 $('#minbtnmbl').addClass('disabled')
             }
             if($('#qtyinputdesk').val() <= 1){
+                $('#qtyinputdesk').val(1)
                 $('#minbtndesk').addClass('disabled')
             }
 
             $('#addbtnmbl').click(()=>{
                 $('#qtyinputmbl').val(parseInt($('#qtyinputmbl').val()) + 1);
                 $('#subtotal').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
-                $('#qty').val(parseInt($('#qtyinputmbl').val()) + 1)
+                $('#qty').val(parseInt($('#qtyinputmbl').val()))
                 if($('#qtyinputmbl').val() > 1){
                     $('#minbtnmbl').removeClass('disabled')
                 }
@@ -207,7 +209,7 @@ function rupiah($angka){
             $('#minbtnmbl').click(()=>{
                 $('#qtyinputmbl').val(parseInt($('#qtyinputmbl').val()) - 1);
                 $('#subtotal').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputmbl').val()))
-                $('#qty').val(parseInt($('#qtyinputmbl').val()) - 1)
+                $('#qty').val(parseInt($('#qtyinputmbl').val()))
                 if($('#qtyinputmbl').val() <= 1){
                     $('#minbtnmbl').addClass('disabled')
                 }
@@ -215,7 +217,7 @@ function rupiah($angka){
             $('#addbtndesk').click(()=>{
                 $('#qtyinputdesk').val(parseInt($('#qtyinputdesk').val()) + 1);
                 $('#subtotaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
-                $('#qtydesk').val(parseInt($('#qtyinputdesk').val()) + 1)
+                $('#qtydesk').val(parseInt($('#qtyinputdesk').val()))
                 if($('#qtyinputdesk').val() > 1){
                     $('#minbtndesk').removeClass('disabled')
                 }
@@ -223,7 +225,7 @@ function rupiah($angka){
             $('#minbtndesk').click(()=>{
                 $('#qtyinputdesk').val(parseInt($('#qtyinputdesk').val()) - 1);
                 $('#subtotaldesk').text(rupiah($('#price').text().replace(/[^0-9]/g,'') * $('#qtyinputdesk').val()))
-                $('#qtydesk').val(parseInt($('#qtyinputdesk').val()) - 1)
+                $('#qtydesk').val(parseInt($('#qtyinputdesk').val()))
                 if($('#qtyinputdesk').val() <= 1){
                     $('#minbtndesk').addClass('disabled')
                 }

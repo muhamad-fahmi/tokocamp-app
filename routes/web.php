@@ -49,19 +49,7 @@ Route::get('/campinggear/{slug}', [PublicController::class, 'showcampinggear']);
 // CATEGORY
 Route::get('/category/{slug}', [PublicController::class, 'showbycategory']);
 
-// CART
-Route::post('/cart', [UserController::class, 'cart']);
-Route::post('/pcart-qty', [UserController::class, 'pcartqty']);
-Route::post('/lcart-qty', [UserController::class, 'lcartqty']);
-Route::get('/cart', [UserController::class, 'mycart']);
 
-Route::delete('/cart/package/{id}', [UserController::class, 'pcartdel']);
-Route::delete('/cart/campinggear/{id}', [UserController::class, 'lcartdel']);
-
-
-
-// CHECKOUT
-Route::post('/checkout', [UserController::class, 'checkout']);
 
 
 // AUTHENTICATED ADMIN
@@ -92,6 +80,17 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
     Route::get('/home', [UserController::class, 'index'])->name('dashboarduser');
 
+    // CART
+    Route::post('/cart', [UserController::class, 'cart']);
+    Route::post('/pcart-qty', [UserController::class, 'pcartqty']);
+    Route::post('/lcart-qty', [UserController::class, 'lcartqty']);
+    Route::get('/cart', [UserController::class, 'mycart']);
+
+    Route::delete('/cart/package/{id}', [UserController::class, 'pcartdel']);
+    Route::delete('/cart/campinggear/{id}', [UserController::class, 'lcartdel']);
+
+    // CHECKOUT
+    Route::post('/checkout', [UserController::class, 'checkout']);
 
     Route::get('/system/logout', [AuthController::class, 'logout'])->name('logoutuser');
 });

@@ -180,7 +180,7 @@ function rupiah($angka){
                                     <div class="card-body">
                                         <p class="card-title">{{ ucwords($campinggear->name) }}</p>
                                         <p class="card-text price"><strong>{{ rupiah($campinggear->price) }}</strong></p>
-                                        <p class="card-text location"><i class="fa-solid fa-location-dot me-1 text-success"></i> Stok {{ $campinggear->stok }}</p>
+                                        <p class="card-text location"><i class="fas fa-tag me-1 text-success"></i> Stok {{ $campinggear->stok }}</p>
                                         <p class="card-text review"><i class="fa-solid fa-star text-warning me-1"></i> 5 Reviews</p>
                                     </div>
                                 </div>

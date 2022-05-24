@@ -59,6 +59,7 @@ class CampinggearController extends Controller
                 Campinggear::create(
                     [
                         'user_id' => 1,
+                        'campinggearcategory_id' => $request->category,
                         'name' => $request->name,
                         'description' => $request->description,
                         'image' => $filename,
@@ -140,6 +141,7 @@ class CampinggearController extends Controller
                 Campinggear::find($id)->update(
                     [
                         'user_id' => 1,
+                        'campinggearcategory_id' => $request->category,
                         'name' => $request->name,
                         'description' => $request->description,
                         'image' => $filename,
